@@ -24,10 +24,14 @@ Kodi 20 or later is required by the packaged Otaku dependency declaration.
 
 [Direct modified Otaku ZIP](https://raw.githubusercontent.com/Halfe85/BugZ-Repository/main/kodi/plugin.video.otaku/plugin.video.otaku-5.3.3%2Bbugz.1.zip)
 
-Download the repository ZIP to storage accessible to Kodi, including a USB drive,
-Shield Downloads, or an existing network share. GitHub's repository page itself
-is not a Kodi file-manager download source. The repository addon uses permanent
-GitHub HTTPS catalog/package URLs once installed; no local HTTP server is needed.
+**Install from inside Kodi (no manual ZIP transfer):** Enable GitHub Pages under this repository's Settings → Pages, set **Deploy from a branch**, **main**, **/(root)**. Once the site is live:
+
+1. In Kodi, open **Settings → File manager → Add source**.
+2. Enter `https://halfe85.github.io/BugZ-Repository/` and name it `BugZ`.
+3. Open **Add-ons → Install from zip file → BugZ → repository.bugz-1.0.0.zip**.
+4. Open **Install from repository → BugZ Kodi Repository → Video add-ons → Otaku**.
+
+The GitHub Pages home page lists the installer ZIP, so Kodi can retrieve it over HTTPS. If the Pages site has not been enabled, download the ZIP to storage Kodi can access instead. Kodi updates use the HTTPS catalog and packages configured in the repository addon; they do not depend on keeping the File manager source.
 
 Detailed installation, logging, and rebuild instructions: [KODI.md](KODI.md).
 
