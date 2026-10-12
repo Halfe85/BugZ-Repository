@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "guid": "ed4e516f-204f-4ab4-99c9-4245221472c7",
+    "name": "JellyTaku",
+    "description": "JellyTaku server-side anime integration and managed Python backend.",
+    "overview": "JellyTaku: Python services and an Angular management dashboard.",
+    "owner": "Halfe85",
+    "category": "General",
+    "versions": [
+      {
+        "version": "0.1.0.0",
+        "changelog": "JellyTaku C# plugin, supervised Python backend, and Angular administration UI.",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://raw.githubusercontent.com/Halfe85/BugZ-Repository/main/packages/JellyTaku_0.1.0.0.zip",
+        "checksum": "8a272abc4fa70059b7313258e26c7285",
+        "timestamp": "2026-10-12T19:59:38Z"
+      }
+    ]
+  }
+]
