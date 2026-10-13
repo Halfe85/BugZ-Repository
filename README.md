@@ -1,59 +1,59 @@
 # BugZ Repository
 
-Public distribution catalogs for Jellyfin plugins and Kodi addons.
+**One GitHub repository, two native plugin distribution systems:** Kodi addons and Jellyfin server plugins.
 
-This repository contains release artifacts and packaging utilities: the Jellyfin
-`manifest.json` and plugin ZIPs under `packages/`, plus Kodi packages and catalog
-files under `kodi/`.
-Plugin source code and build workflows remain in their respective private
-source repositories.
+The project publishes release artifacts and catalogs. Kodi and Jellyfin **do not share an executable addon format**: Kodi installs Python addons from XML/ZIP, while Jellyfin installs its own compiled server plugins from a JSON manifest and plugin ZIPs.
 
-## Kodi: modified Otaku
+## Quick installation
 
-Download and install [BugZ Kodi Repository](https://raw.githubusercontent.com/Halfe85/BugZ-Repository/main/kodi/repository.bugz/repository.bugz-1.0.0.zip) using Kodi's **Install from zip file**.
-Then open **Install from repository → BugZ Kodi Repository → Video add-ons → Otaku**.
-Restart Kodi after updating and keep AnimePahe enabled in Otaku's provider settings.
+| Platform | Published addon/plugin | Install repository |
+| --- | --- | --- |
+| Kodi 20+ | Modified Otaku `5.3.3+bugz.1` | [Kodi repository installer](https://raw.githubusercontent.com/Halfe85/BugZ-Repository/main/repository.bugz-1.0.0.zip) |
+| Jellyfin 12 (ABI 12.0.0.0) | JellyTaku `0.1.6.0` | [Jellyfin manifest](https://raw.githubusercontent.com/Halfe85/BugZ-Repository/main/manifest.json) |
 
-The custom Otaku version is `5.3.3+bugz.1`; its addon ID remains `plugin.video.otaku`
-so it uses the existing Otaku settings. AnimePahe keeps its name while using
-Megaplay internally, with AniList/MAL lookup, source decoding, fresh playback
-CDN tokens, Kodi subtitle preferences, and diagnostic logging. The repository
-also indexes the required `context.otaku` 1.0.35 dependency from its upstream Hooty distribution. Other dependencies
-come from Kodi's official repository or already configured addon repositories.
-Kodi 20 or later is required by the packaged Otaku dependency declaration.
+### Kodi
 
-[Direct modified Otaku ZIP](https://raw.githubusercontent.com/Halfe85/BugZ-Repository/main/kodi/plugin.video.otaku/plugin.video.otaku-5.3.3%2Bbugz.1.zip)
+1. Download the [repository installer ZIP](https://raw.githubusercontent.com/Halfe85/BugZ-Repository/main/repository.bugz-1.0.0.zip), or add `https://halfe85.github.io/BugZ-Repository/` as a File manager source in Kodi (when GitHub Pages is enabled).
+2. Add-ons → Install from zip file → `repository.bugz-1.0.0.zip`.
+3. Install from repository → BugZ Kodi Repository → Video add-ons → Otaku.
 
-**Install from inside Kodi (no manual ZIP transfer):** Enable GitHub Pages under this repository's Settings → Pages, set **Deploy from a branch**, **main**, **/(root)**. Once the site is live:
+The modified Otaku addon retains the ID `plugin.video.otaku` and its existing settings. Its AnimePahe provider uses Megaplay internally. The catalog also includes the `context.otaku` dependency from the upstream Hooty repository. Other dependencies are supplied by Kodi or other configured addon repositories. For version pinning, logging, and rebuilding, see [KODI.md](KODI.md).
 
-1. In Kodi, open **Settings → File manager → Add source**.
-2. Enter `https://halfe85.github.io/BugZ-Repository/` and name it `BugZ`.
-3. Open **Add-ons → Install from zip file → BugZ → repository.bugz-1.0.0.zip**.
-4. Open **Install from repository → BugZ Kodi Repository → Video add-ons → Otaku**.
+### Jellyfin
 
-The GitHub Pages home page lists the installer ZIP, so Kodi can retrieve it over HTTPS. If the Pages site has not been enabled, download the ZIP to storage Kodi can access instead. Kodi updates use the HTTPS catalog and packages configured in the repository addon; they do not depend on keeping the File manager source.
+1. On your Jellyfin server, open **Dashboard → Plugins → Repositories**.
+2. Add a repository named `BugZ` using this **exact JSON manifest URL**:
 
-Detailed installation, logging, and rebuild instructions: [KODI.md](KODI.md).
+   ```text
+   https://raw.githubusercontent.com/Halfe85/BugZ-Repository/main/manifest.json
+   ```
+3. Under **Plugins → Catalog**, install **JellyTaku** if your server version is compatible.
+4. Restart Jellyfin.
 
-## Jellyfin catalog URL
+JellyTaku version `0.1.6.0` is currently published and declares target ABI `12.0.0.0`. The plugin packages contain a C# assembly and a Python backend with an administration UI; a working Python 3 installation is required on the Jellyfin host/container. See [JELLYFIN.md](JELLYFIN.md).
+
+## Distribution layout
 
 ```text
-https://raw.githubusercontent.com/Halfe85/BugZ-Repository/main/manifest.json
+index.html                           GitHub Pages landing page for both platforms
+repository.bugz-1.0.0.zip            Kodi installer ZIP discoverable at website root
+manifest.json                        Jellyfin plugin catalog (stable URL)
+packages/                            Jellyfin plugin release ZIPs
+kodi/addons.xml                      Kodi addon catalog
+kodi/addons.xml.md5                  Kodi catalog checksum
+kodi/dependencies.xml                Kodi external dependency catalog
+kodi/dependencies.xml.md5            External catalog checksum
+kodi/repository.bugz/                Kodi repository installer and addon metadata
+kodi/plugin.video.otaku/             Modified Kodi Otaku ZIP and metadata
+repository.bugz/addon.xml            Kodi repository source manifest
+tools/build_kodi_repo.py             Local Kodi release packager
+tools/verify_repositories.py         Checks both distribution catalogs and archives
 ```
 
-In Jellyfin, open **Dashboard → Plugins → Repositories** and add this URL.
-Published releases will appear under **Plugins → Catalog** when compatible
-with your Jellyfin server version.
+**Compatibility commitment:** Existing Kodi update URLs under `kodi/` and the existing Jellyfin URL `manifest.json` remain unchanged. The website provides a single installation entry point; the plugin engines remain separate.
 
-## JellyTaku
+To validate both distributions locally, run `python3 tools/verify_repositories.py`. GitHub Actions also runs this verification on changes.
 
-JellyTaku is being developed for Jellyfin 12 with a C# plugin, an automatically
-started Python service, and an Angular management dashboard.
+GitHub Pages is optional for normal catalog updates, but must be enabled (Settings → Pages → Deploy from branch → `main` → `/(root)`) for installation through Kodi's HTTP File manager source.
 
-**No JellyTaku release has been published yet.** The catalog starts as an
-empty JSON array, and the source-side release workflow will add an entry and
-ZIP once enabled and approved. Python 3 must be available on the Jellyfin host
-(or in its container); releases bundle Python modules but not the interpreter.
-
-Do not commit source credentials, watchlists, tokens, personal data, or
-backend SQLite databases to this public repository.
+Plugin source code and release workflows may be maintained in separate source repositories. Never commit login credentials, tokens, user databases, watchlists, or service configuration secrets here.

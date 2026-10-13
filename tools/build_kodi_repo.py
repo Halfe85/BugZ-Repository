@@ -131,6 +131,9 @@ def main():
     context = ET.parse(context_source / 'addon.xml').getroot()
     archives = [zip_addon(otaku_source, otaku, {'BUGZ-CHANGES.txt': changes.encode(), 'changelog.txt': changelog}),
                 zip_addon(repository_source, repo)]
+    # Publish a root-level Kodi installer for GitHub Pages File manager sources.
+    # Keep kodi/repository.bugz/ as the unchanged auto-update download location.
+    shutil.copyfile(archives[1], ROOT / archives[1].name)
     catalog = ET.Element('addons')
     for manifest in (repo, otaku):
         catalog.append(manifest)
