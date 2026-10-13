@@ -86,7 +86,7 @@ def zip_addon(source, manifest, extra=None, output_root=None):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--capture-installed', type=Path)
-    parser.add_argument('--otaku-version', default='5.3.3+bugz.1')
+    parser.add_argument('--otaku-version', default='5.3.3+bugz.2')
     args = parser.parse_args()
     if not re.fullmatch(r'[A-Za-z0-9.+_~]+', args.otaku_version):
         parser.error('Invalid Kodi version')
@@ -97,6 +97,10 @@ def main():
     otaku_source, context_source = snapshots / 'plugin.video.otaku', snapshots / 'context.otaku'
     if not otaku_source.exists() or not context_source.exists():
         parser.error('Capture local addons first with --capture-installed PATH_TO_KODI_ADDONS')
+    if args.otaku_version == '5.3.3+bugz.2':
+        resolver = (otaku_source / 'resources/lib/windows/resolver.py').read_text()
+        if 'STARTUP_DELAY_SECONDS = 3.0' not in resolver:
+            parser.error('This release requires the startup-delay source. Extract the published bugz.2 ZIP into _local/source/ or capture an installed bugz.2 addon.')
     repository_source = ROOT / 'repository.bugz'
     repository_source.mkdir(exist_ok=True)
     repo = ET.Element('addon', {'id': REPO_ID, 'name': 'BugZ Kodi Repository', 'version': '1.0.0', 'provider-name': 'Halfe85'})
@@ -125,6 +129,7 @@ def main():
                'AnimePahe retains its identity and uses Megaplay internally.\n'
                'AniList/MAL lookup, AES source decoding, fresh playback CDN tokens,\n'
                'Kodi subtitle preferences and diagnostic file logging are included.\n'
+               'Loaded video is held paused for 3 seconds before playback begins.\n'
                'Original authors: TeamOtaku. Original addon license: GPL-3.0.\n'
                'This is a custom distribution, not an upstream TeamOtaku release.\n')
     changelog = changes.encode() + b'\n' + (otaku_source / 'changelog.txt').read_bytes()

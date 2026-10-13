@@ -8,7 +8,7 @@ The project publishes release artifacts and catalogs. Kodi and Jellyfin **do not
 
 | Platform | Published addon/plugin | Install repository |
 | --- | --- | --- |
-| Kodi 20+ | Modified Otaku `5.3.3+bugz.1` | [Kodi repository installer](https://raw.githubusercontent.com/Halfe85/BugZ-Repository/main/repository.bugz-1.0.0.zip) |
+| Kodi 20+ | Modified Otaku `5.3.3+bugz.2` | [Kodi repository installer](https://raw.githubusercontent.com/Halfe85/BugZ-Repository/main/repository.bugz-1.0.0.zip) |
 | Jellyfin 12 (ABI 12.0.0.0) | JellyTaku `0.0.6.0` | [Jellyfin manifest](https://raw.githubusercontent.com/Halfe85/BugZ-Repository/main/manifest.json) |
 
 ### Kodi
@@ -63,3 +63,10 @@ Plugin source code and release workflows may be maintained in separate source re
 The current JellyTaku release is pre-alpha `v0.0.6` (Jellyfin manifest: `0.0.6.0`).
 Previous `0.1.x` packages are now relabeled `0.0.x` with the original archive bytes
 and MD5 checksums retained. Alpha (`vX.aY.Z`) and beta (`vX.bY.Z`) have not begun.
+
+## Otaku startup delay
+
+Otaku now holds loaded video paused for three seconds before resuming, across
+standard and widget/context playback. Stopping playback, Kodi shutdown, or an
+early manual resume cancels the automatic hold. A few initial frames may precede
+Kodi's AV-ready notification; Shield display timing remains to be tested.

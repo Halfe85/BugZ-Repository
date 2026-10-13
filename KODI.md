@@ -10,7 +10,7 @@
 5. Install/update Otaku, restart Kodi, enable AnimePahe, and rescrape an episode.
 
 The addon ID remains plugin.video.otaku and settings remain in the active Kodi
-profile. The published custom version is 5.3.3+bugz.1. Required context.otaku is
+profile. The published custom version is 5.3.3+bugz.2. Required context.otaku is
 indexed here and downloaded from its upstream Hooty distribution. Kodi's normal addon dependency installer handles
 beautifulsoup4, inputstreamhelper, and pyqrcode using configured repositories.
 The repository uses a Kodi 20+ directory because Otaku requires xbmc.python 3.0.1.
@@ -65,3 +65,15 @@ packages/ distribution separate from the Kodi catalog.
 Kodi references:
 - https://kodi.wiki/view/Add-on_repositories
 - https://kodi.wiki/view/Add-on_manager#How_to_install_from_a_ZIP_file
+
+Startup delay: once Kodi signals that the video is loaded, Otaku holds it paused
+for three seconds and resumes the same video. Stop, shutdown, and an early manual
+resume cancel the automatic hold. This applies to standard and widget/context
+playback. A few initial frames may precede Kodi's AV-ready notification; the
+three-second hold is not a hardware display-ready signal. Shield verification
+is still required.
+
+Run `python tools/test_startup_delay.py -v` to verify the pause/resume state
+transitions and both resolver handoffs. On a fresh clone the tests read the
+published ZIP. A bugz.2 rebuild requires its modified source; the build refuses
+to label older source as bugz.2.
