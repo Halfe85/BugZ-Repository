@@ -13,8 +13,8 @@ The project publishes release artifacts and catalogs. Kodi and Jellyfin **do not
 
 ### Kodi
 
-1. Download the [repository installer ZIP](https://raw.githubusercontent.com/Halfe85/BugZ-Repository/main/repository.bugz-1.0.0.zip), or add `https://halfe85.github.io/BugZ-Repository/` as a File manager source in Kodi (when GitHub Pages is enabled).
-2. Add-ons → Install from zip file → `repository.bugz-1.0.0.zip`.
+1. Download the [repository installer ZIP](https://raw.githubusercontent.com/Halfe85/BugZ-Repository/main/repository.bugz-1.0.0.zip), and save it to local/shared storage Kodi can read. GitHub Pages does not provide Kodi-compatible automatic directory listings; do not depend on browsing it as a Kodi File manager source.
+2. Add-ons → Install from zip file → navigate to the downloaded `repository.bugz-1.0.0.zip`.
 3. Install from repository → BugZ Kodi Repository → Video add-ons → Otaku.
 
 The modified Otaku addon retains the ID `plugin.video.otaku` and its existing settings. Its AnimePahe provider uses Megaplay internally. The catalog also includes the `context.otaku` dependency from the upstream Hooty repository. Other dependencies are supplied by Kodi or other configured addon repositories. For version pinning, logging, and rebuilding, see [KODI.md](KODI.md).
