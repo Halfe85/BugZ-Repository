@@ -8,6 +8,14 @@
     "category": "General",
     "versions": [
       {
+        "version": "0.0.7.0",
+        "changelog": "JellyTaku C# plugin, supervised Python backend, and Angular administration UI.",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://raw.githubusercontent.com/Halfe85/BugZ-Repository/main/packages/JellyTaku_0.0.7.0.zip",
+        "checksum": "c85f994027851bdb355a19dc9dbb06a1",
+        "timestamp": "2026-10-13T14:11:20Z"
+      },
+      {
         "version": "0.0.6.0",
         "changelog": "JellyTaku C# plugin, supervised Python backend, and Angular administration UI.",
         "targetAbi": "12.0.0.0",
