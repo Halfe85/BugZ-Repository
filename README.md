@@ -9,7 +9,7 @@ The project publishes release artifacts and catalogs. Kodi and Jellyfin **do not
 | Platform | Published addon/plugin | Install repository |
 | --- | --- | --- |
 | Kodi 20+ | Modified Otaku `5.3.3+bugz.1` | [Kodi repository installer](https://raw.githubusercontent.com/Halfe85/BugZ-Repository/main/repository.bugz-1.0.0.zip) |
-| Jellyfin 12 (ABI 12.0.0.0) | JellyTaku `0.0.6.0` | [Jellyfin manifest](https://raw.githubusercontent.com/Halfe85/BugZ-Repository/main/manifest.json) |
+| Jellyfin 12 (ABI 12.0.0.0) | JellyTaku `0.0.7.0` | [Jellyfin manifest](https://raw.githubusercontent.com/Halfe85/BugZ-Repository/main/manifest.json) |
 
 ### Kodi
 
@@ -30,7 +30,7 @@ The modified Otaku addon retains the ID `plugin.video.otaku` and its existing se
 3. Under **Plugins → Catalog**, install **JellyTaku** if your server version is compatible.
 4. Restart Jellyfin.
 
-JellyTaku version `0.0.6.0` is currently published and declares target ABI `12.0.0.0`. The plugin packages contain a C# assembly and a Python backend with an administration UI; a working Python 3 installation is required on the Jellyfin host/container. See [JELLYFIN.md](JELLYFIN.md).
+JellyTaku version `0.0.7.0` is currently published and declares target ABI `12.0.0.0`. The plugin packages contain a C# assembly and a Python backend with an administration UI; a working Python 3 installation is required on the Jellyfin host/container. See [JELLYFIN.md](JELLYFIN.md).
 
 ## Distribution layout
 
@@ -60,6 +60,6 @@ Plugin source code and release workflows may be maintained in separate source re
 
 ## Pre-alpha version labels
 
-The current JellyTaku release is pre-alpha `v0.0.6` (Jellyfin manifest: `0.0.6.0`).
+The current JellyTaku release is pre-alpha `v0.0.7` (Jellyfin manifest: `0.0.7.0`).
 Previous `0.1.x` packages are now relabeled `0.0.x` with the original archive bytes
 and MD5 checksums retained. Alpha (`vX.aY.Z`) and beta (`vX.bY.Z`) have not begun.
