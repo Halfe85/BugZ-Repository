@@ -10,7 +10,7 @@
 5. Install/update Otaku, restart Kodi, enable AnimePahe, and rescrape an episode.
 
 The addon ID remains plugin.video.otaku and settings remain in the active Kodi
-profile. The published custom version is 5.3.3+bugz.2. Required context.otaku is
+profile. The published custom version is 5.3.3+bugz.3. Required context.otaku is
 indexed here and downloaded from its upstream Hooty distribution. Kodi's normal addon dependency installer handles
 beautifulsoup4, inputstreamhelper, and pyqrcode using configured repositories.
 The repository uses a Kodi 20+ directory because Otaku requires xbmc.python 3.0.1.
@@ -77,3 +77,23 @@ Run `python tools/test_startup_delay.py -v` to verify the pause/resume state
 transitions and both resolver handoffs. On a fresh clone the tests read the
 published ZIP. A bugz.2 rebuild requires its modified source; the build refuses
 to label older source as bugz.2.
+
+## AniList metadata recovery
+
+Show details come from https://graphql.anilist.co. Empty or non-JSON responses
+previously raised an exception while opening a show. Transient failures now
+have at most two retries with abort-aware waits. Long Retry-After cooldowns
+are not retried immediately, and failed results are not cached. Existing show
+metadata is reused where available; otherwise Otaku displays an unavailable
+message and finishes the show folder without writing watch progress.
+
+Failed responses are recorded in
+`special://profile/addon_data/plugin.video.otaku/anilist-metadata.log`, including
+status, content type, attempt, reason, and up to 512 characters of response body.
+No authentication headers are recorded. The original failing response was not
+saved, so its exact server-side cause remains unknown. Live retries through
+Otaku's actual HTTP client succeeded during investigation.
+
+Run `python tools/test_anilist_metadata.py -v` for recovery and caller regressions.
+A bugz.3 rebuild requires its modified source (extract the published ZIP into
+_local/source/ or capture an installed bugz.3 addon).

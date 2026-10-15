@@ -8,7 +8,7 @@ The project publishes release artifacts and catalogs. Kodi and Jellyfin **do not
 
 | Platform | Published addon/plugin | Install repository |
 | --- | --- | --- |
-| Kodi 20+ | Modified Otaku `5.3.3+bugz.2` | [Kodi repository installer](https://raw.githubusercontent.com/Halfe85/BugZ-Repository/main/repository.bugz-1.0.0.zip) |
+| Kodi 20+ | Modified Otaku `5.3.3+bugz.3` | [Kodi repository installer](https://raw.githubusercontent.com/Halfe85/BugZ-Repository/main/repository.bugz-1.0.0.zip) |
 | Jellyfin 12 (ABI 12.0.0.0) | JellyTaku `0.0.6.0` | [Jellyfin manifest](https://raw.githubusercontent.com/Halfe85/BugZ-Repository/main/manifest.json) |
 
 ### Kodi

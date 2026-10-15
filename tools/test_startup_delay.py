@@ -12,7 +12,7 @@ SOURCE = ROOT / '_local/source/plugin.video.otaku/resources/lib/windows/resolver
 if SOURCE.exists():
     RESOLVER_SOURCE = SOURCE.read_text()
 else:
-    with zipfile.ZipFile(ROOT / 'kodi/plugin.video.otaku/plugin.video.otaku-5.3.3+bugz.2.zip') as archive:
+    with zipfile.ZipFile(ROOT / 'kodi/plugin.video.otaku/plugin.video.otaku-5.3.3+bugz.3.zip') as archive:
         RESOLVER_SOURCE = archive.read('plugin.video.otaku/resources/lib/windows/resolver.py').decode()
 
 
